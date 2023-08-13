@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "grpc-login-app/login";
+
+message Message {
+    string Username = 1;
+    string Password = 2;
+}
+
+message Token {
+    string Token = 1;
+}
+
+message RegisterResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+service login {
+    rpc Login (Message) returns (Token) {}
+    rpc Register (Message) returns (RegisterResponse) {}
+}

@@ -1,0 +1,52 @@
+# Compiled Go binaries and executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Compiled Go object files, static libraries, and build directories
+*.o
+*.a
+*_obj/
+*_test/
+
+# Go dependencies
+vendor/
+Godeps/
+go.sum
+
+# Compiled Protocol Buffers artifacts
+*.pb.go
+
+# Compiled gRPC service files
+*.pb.gw.go
+*.swagger.json
+
+# Build output
+build/
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Logs and temporary files
+logs/
+*.log
+*.log.*
+*.tmp
+
+# Compiled binaries for protoc (protobuf compiler)
+protoc-gen-go
+protoc-gen-go-grpc
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
