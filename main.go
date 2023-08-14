@@ -2,6 +2,7 @@ package main
 
 import (
 	"grpc-login-app/login"
+	"grpc-login-app/login/generated"
 	"net"
 
 	"google.golang.org/grpc"
@@ -17,7 +18,7 @@ func main() {
 
 	g := grpc.NewServer()
 
-	login.RegisterLoginServer(g, m)
+	generated.RegisterLoginServer(g, m)
 
 	err = g.Serve(listener)
 	if err != nil {

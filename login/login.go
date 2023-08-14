@@ -3,27 +3,30 @@ package login
 import (
 	"context"
 	"errors"
+	"grpc-login-app/login/generated"
 )
 
 type Login_Server struct {
-	loginDetails *Message
-	UnimplementedLoginServer
+	LoginDetails *generated.LoginCredentials
+	generated.UnimplementedLoginServer
 }
 
-func (l *Login_Server) Login(ctx context.Context, message *Message) (*Token, error) {
-	if len(message.Password) < 8 {
-		return nil, errors.New("Password is too short")
+func (l *Login_Server) Login(ctx context.Context, creds *generated.LoginCredentials) (*generated.Token, error) {
+	if !passwordValid(creds.Password) {
+		return nil, errors.New("password is too short")
 	}
-	return &Token{
-		Token: message.Username,
+	return &generated.Token{
+		Token: creds.Username,
 	}, nil
 }
 
-func (l *Login_Server) Register(ctx context.Context, message *Message) (*RegisterResponse, error) {
-	if len(message.Password) < 8 {
-		return nil, errors.New("Password is too short")
+func (l *Login_Server) Register(ctx context.Context, message *generated.RegisterCredentials) (*generated.EmptyResponse, error) {
+	if !passwordValid(message.Password) {
+		return nil, errors.New("password is too short")
 	}
-	return &RegisterResponse{
-		Success: true,
-	}, nil
+	return &generated.EmptyResponse{}, nil
+}
+
+func passwordValid(password string) bool {
+	return len(password) >= 8
 }
