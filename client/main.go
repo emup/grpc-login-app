@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"grpc-login-app/login"
+	"grpc-login-app/login/generated"
 
 	"google.golang.org/grpc"
 )
@@ -14,9 +14,12 @@ func main() {
 	}
 	defer conn.Close()
 
-	loginClient := login.NewLoginClient(conn)
+	loginClient := generated.NewLoginClient(conn)
 
-	token, err := loginClient.Login(context.Background(), &login.Message{Username: "user", Password: "OwO23456"})
+	token, err := loginClient.Login(context.Background(),
+		&generated.LoginCredentials{Username: "user",
+			Password: "OwO23456",
+		})
 	if err != nil {
 		print(err.Error())
 	}

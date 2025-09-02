@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "./generated";
+
+message LoginCredentials {
+    string Username = 1;
+    string Password = 2;
+}
+
+message RegisterCredentials {
+    string Username = 1;
+    string Password = 2;
+    string Email = 3;
+}
+message Token {
+    string Token = 1;
+}
+
+message EmptyResponse {}
+
+service login {
+    rpc Login (LoginCredentials) returns (Token) {}
+    rpc Register (RegisterCredentials) returns (EmptyResponse) {}
+}
